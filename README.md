@@ -1,10 +1,10 @@
 # wp-eks-rds-example
 
-1.create aws s3 bucket for terraform backend to store statefile. 
+1. Create aws s3 bucket for terraform backend to store statefile. 
 ```
 aws s3api create-bucket --bucket _{your-terraform-state-bucket}_ --region _{your-region}_
 ```
-2. intilize terraform, check plan and apply this can take some time while the eks cluster and rds resources are created and deployed. 
+2. Intilize terraform, check plan and apply this can take some time while the eks cluster and rds resources are created and deployed. 
 ```
 terraform init
 ```
@@ -15,19 +15,19 @@ terraform plan
 terraform apply
 ```
 
-4. get coffee. 
+4. Get coffee. 
 
-5. configure kube config file now that it has been deployed.  
+5. Configure kube config file now that it has been deployed.  
 ```
 aws eks update-kubeconfig --name _{cluster-name}_ --region _{your-region}_
 ```
 
-7. check rds endpoint in the AWS concole and create k8s db-secret
+6. Check rds endpoint in the AWS concole and create k8s db-secret
 ```
 kubectl create secret generic db-secret --from-literal=DB_HOST=_{yourdbendpoint}_.rds.amazonaws.com --from-literal=DB_NAME=_{db-name}_ --from-literal=DB_USER=_{admin}_ --from-literal=DB_PASSWORD=_{rdspassword}_
 ```
 
-9. apply wp services and deployment 
+7. Apply wp services and deployment 
 ```
 kubectl apply -f wordpress-svc.yaml
 ```
